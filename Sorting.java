@@ -1,6 +1,5 @@
 
 public class Sorting {
-		private static int arraySize;
 		
 	public static void main(String[] args){
 		
