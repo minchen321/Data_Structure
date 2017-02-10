@@ -13,14 +13,12 @@ public class Sorting {
 	    print(arraylist_1);
 	    
 	    int[] arraylist_2 = {9, 10, 8, 7, 6, 4, 5, 1, 3, 2};
-	    bubbleSort(arraylist_2);
+	    selectionSort(arraylist_2);
 	    print(arraylist_2);
 	    
 	    int[] arraylist_3 = {9, 8, 7, 5, 4, 6, 1, 3, 2, 10};
 		arraylist_3 = mergeSort(arraylist_3);
 		print(arraylist_3);
-		
-		int[] arraylist_4 = {9, 8, 7, 5, 4, 6, 1, 3, 2, 10};
 	}
 	
 //----------------Insertion Sort------------------------
