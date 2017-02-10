@@ -1,6 +1,8 @@
 
 public class Sorting {
-		
+	 static int[] numbers;
+     static int number;
+     
 	public static void main(String[] args){
 		
 	    int[] arraylist = {10, 9, 8, 7, 6, 4, 5, 1, 3, 2};
@@ -18,6 +20,10 @@ public class Sorting {
 	    int[] arraylist_3 = {9, 8, 7, 5, 4, 6, 1, 3, 2, 10};
 		arraylist_3 = mergeSort(arraylist_3);
 		print(arraylist_3);
+		
+	    int[] arraylist_4 = {9, 8, 7, 5, 4, 6, 1, 3, 2, 10};
+		sort(arraylist_4);
+		print(arraylist_4);
 	}
 	
 //----------------Insertion Sort------------------------
@@ -157,6 +163,7 @@ public class Sorting {
 		  return result;
 	 }
 	 
+	 
 //----------------Quick Sort------------------------	 
 	 //QuickSort is recursive 
 	 //Efficient for large data sets
@@ -164,8 +171,51 @@ public class Sorting {
 	 //Everything on the left is smaller than the pivot; everything on the right is greater than the pivot
 	 //Start the sorting by setting the first/middle/last item as a pivot 
 	 //But randomly chosen pivots ensure O(n log n)	 
-	 
-	 //print function
+
+     public static void sort(int[] values) {          
+    	 if (values ==null || values.length==0){	// check for empty or null array 
+    		 return;
+         }
+         	numbers = values;
+            number = values.length;
+            quicksort(0, number - 1);
+     }
+
+     public static void quicksort(int low, int high) {
+             int i = low, j = high;
+             int pivot = numbers[low + (high - low)/2]; // Get the pivot the middle of the list
+
+             // Divide into two lists
+             while (i <= j) {
+                     // If the current value from the left list is smaller than the pivot then get the next element from the left list
+                     while (numbers[i] < pivot) {
+                             i++;
+                     }
+                     // If the current value from the right list is larger than the pivot then get the next element from the right list
+                     while (numbers[j] > pivot) {
+                             j--;
+                     }
+
+                     // If we have found a values in the left list which is larger than
+                     // the pivot and a value in the right list
+                     // which is smaller then the pivot element then we swap the values.
+                     if (i <= j) {
+                    	 int temp = numbers[i];
+                         numbers[i] = numbers[j];
+                         numbers[j] = temp;
+                      // As we are done we can increase i and j
+                         i++;
+                         j--;
+                     }
+             }
+             // Recursion
+             if (low < j)
+                     quicksort(low, j);
+             if (i < high)
+                     quicksort(i, high);
+     }
+     
+//print function
 	 public static void print(int[] list){
 		 for(int i = 0; i < list.length; i++){
 			 System.out.print(list[i]+ " ");	 
