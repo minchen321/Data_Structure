@@ -4,7 +4,7 @@ public class Sorting {
 		
 	public static void main(String[] args){
 		
-		int[] arraylist = {10, 9, 8, 7, 6, 4, 5, 1, 3, 2};
+	    int[] arraylist = {10, 9, 8, 7, 6, 4, 5, 1, 3, 2};
 	    insertionSort(arraylist);
 	    print(arraylist);
 	    
