@@ -1,18 +1,27 @@
 
 public class Sorting {
-	
-	public static void main(String[] args){     
+		private static int arraySize;
+		
+	public static void main(String[] args){
 		
 		int[] arraylist = {10, 9, 8, 7, 6, 4, 5, 1, 3, 2};
 	    insertionSort(arraylist);
 	    print(arraylist);
+	    
 	    int[] arraylist_1 = {10, 7, 8, 9, 4, 6, 5, 1, 3, 2};
 	    bubbleSort(arraylist_1);
 	    print(arraylist_1);
+	    
 	    int[] arraylist_2 = {9, 10, 8, 7, 6, 4, 5, 1, 3, 2};
 	    bubbleSort(arraylist_2);
 	    print(arraylist_2);
-    }
+	    
+	    int[] arraylist_3 = {9, 8, 7, 5, 4, 6, 1, 3, 2, 10};
+		arraylist_3 = mergeSort(arraylist_3);
+		print(arraylist_3);
+		
+		int[] arraylist_4 = {9, 8, 7, 5, 4, 6, 1, 3, 2, 10};
+	}
 	
 //----------------Insertion Sort------------------------
 	//All items to the left of current item are smaller
@@ -79,14 +88,92 @@ public class Sorting {
 			 }//if			 
 		 }//for loop i	 
 	 return list;	 
+	 }	 
+	 
+//----------------Merge Sort------------------------	
+	 //Divide the list into small equal-size lists
+	 //compare the elements on each list, the smaller value goes into the new sorted list
+	 //Continue the the comparison until the list is completely sorted
+	 //MergeSort is recursive 
+	 //Use for large data sets
+	 //It runs in O(n log n).
+	 public static int[] mergeSort(int[] list){
+		 if(list.length <= 1)// base case is when the array is empty or there is only one element
+			 return list; 
+		 int midpoint = list.length / 2;
+		 int[] left = new int[midpoint];//divide the list to left and right array
+		 int[] right;
+		 
+		 if(list.length % 2 == 0) //check the length of list is even or odd
+			 right = new int[midpoint];
+		 else 
+			 right = new int[midpoint + 1];
+		
+		 int[] result = new int[list.length];
+		 for(int i = 0; i < midpoint; i++)
+			 left[i] = list[i];
+		 int x = 0;
+		 for(int j = midpoint; j < list.length; j++){
+			 if(x < right.length){
+				 right[x] = list[j];
+				 x++;
+			 }
+		  }//for loop
+		 left = mergeSort(left);//break down left array
+		 right = mergeSort(right);//break down right array
+		 result = merge(left, right);
+
+		 return result;
 	 }
+
+	 public static int[] merge(int[] left, int[] right){
+		  int lengthResult = left.length + right.length;
+		  int[] result = new int[lengthResult];
+		  int indexLeft = 0;
+		  int indexRight = 0;
+		  int indexResult = 0;
+		  
+		  while(indexLeft < left.length || indexRight < right.length){
+			  if(indexLeft < left.length && indexRight < right.length){
+				  if(left[indexLeft] <= right[indexRight]){
+					  result[indexResult] = left[indexLeft];
+					  indexLeft++;
+					  indexResult++;
+				  }
+				  else{
+					  result[indexResult] = right[indexRight];
+					  indexRight++;
+					  indexResult++;
+				  }//else  
+			  }
+			  else if(indexLeft < left.length){ //if there is still elements on the left, it must be greater than the previous elements
+				  result[indexResult] = left[indexLeft];
+				  indexLeft++;
+				  indexResult++;
+			  }
+			  else if(indexRight  < right.length){ //if there is still elements on the right, it must be greater than the previous elements
+				  result[indexResult] = right[indexRight];
+				  indexRight++;
+				  indexResult++;
+			  }	  
+		  }//while
+		  return result;
+	 }
+	 
+//----------------Quick Sort------------------------	 
+	 //QuickSort is recursive 
+	 //Efficient for large data sets
+	 //Run time depends on the selection of pivot; Worst case runs in O(n^2); Usually is O(n log n)
+	 //Everything on the left is smaller than the pivot; everything on the right is greater than the pivot
+	 //Start the sorting by setting the first/middle/last item as a pivot 
+	 //But randomly chosen pivots ensure O(n log n)	 
 	 
 	 //print function
 	 public static void print(int[] list){
 		 for(int i = 0; i < list.length; i++){
 			 System.out.print(list[i]+ " ");	 
 		 }
-		 System.out.println(" ");
+		 System.out.println("\n");
 	 }//print
 	 
 }
